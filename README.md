@@ -3,4 +3,4 @@
 ##to start working please:
  - clone the repo
  - npm i
- - npm run grab {{site_url}} {{destination_directory}}
+ - ```npm run grab {{site_url}} {{destination_directory}}```
