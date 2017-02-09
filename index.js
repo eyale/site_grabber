@@ -1,11 +1,24 @@
-const scraper = require('website-scraper')
+// to grab the site enter in  terminal:
+// npm run grab {{the_site_url}} {{target_folder}}
 
-scraper.scrape({
+const globalTunnel = require('global-tunnel');
+const scraper = require('website-scraper');
 
-    urls: process.argv[2] !== undefined || process.argv[2] !== ''
-        ? process.argv[2]
-        : 'http://google.com',
-    directory: process.argv[3]
+
+// process.env.http_proxy = 'http://10.0.0.1:3129';
+// globalTunnel.initialize();
+
+ globalTunnel.initialize({
+   host: '10.0.0.10',
+   port: 8080,
+   tunnel: 'both'
+ })
+
+scraper({
+    urls: process.argv[2],
+    directory: process.argv[3] ? process.argv[3] : './site/',
+    recursive: true,
+    maxDepth: 1
 })
-    .then(() => {console.log(`.then() :  ${process.argv}`)})
-    .catch(() => {console.log(`.catch() :  ${process.argv}`)})
+.then(console.log('success'))
+.catch(error => console.log(error));
